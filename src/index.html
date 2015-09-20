@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <title>HOOLAY</title>
+    <link rel="stylesheet" href="./assets/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <!-- status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay"></div>
+    <!-- views-->
+    <div class="views">
+      <!-- main view -->
+      <div class="view view-main">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="center sliding">艺术家基本信息</div>
+            <div class="right">
+            </div>
+          </div>
+        </div>
+        <div class="pages navbar-through">
+          <div data-page="index" class="page">
+            <!-- Scrollable page content-->
+            <div class="page-content">
+                <div class="index-welcome-loading">
+                    <span style="width:40px; height:40px" class="preloader"></span>
+                </div>
+            </div>
+          </div>
+          <div class="page cached" data-page="userentry">
+            <div class="page-content userentry-content"></div>
+          </div>
+        </div>
+      </div>
+      <!-- views end -->
+    </div>
+    <script type="text/javascript" src="./assets/js/avalon.mobile.shim.js"></script>
+    <script type="text/javascript" src="./assets/js/framework7.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="./assets/js/webuploader.html5only.min.js"></script>
+    <script type="text/javascript" src="./assets/bundle.js"></script>
+  </body>
+</html>

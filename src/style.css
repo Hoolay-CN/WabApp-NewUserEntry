@@ -1,0 +1,27 @@
+/* line 1, style.scss */
+.index-welcome-loading {
+  text-align: center;
+  padding: 30px 0;
+}
+
+/* line 7, style.scss */
+.user-entry-list-block-a {
+  margin-top: 0px;
+}
+/* line 10, style.scss */
+.user-entry-list-block-b {
+  margin-bottom: 20px;
+}
+/* line 15, style.scss */
+.user-entry-list-block-a input[type=text],
+.user-entry-list-block-a input[type=password],
+.user-entry-list-block-a input[type=email], .user-entry-list-block-b input[type=text],
+.user-entry-list-block-b input[type=password],
+.user-entry-list-block-b input[type=email] {
+  color: #8e8e93;
+  text-align: right;
+}
+/* line 24, style.scss */
+.user-entry-lists .avatar-item .item-inner {
+  min-height: 100px;
+}

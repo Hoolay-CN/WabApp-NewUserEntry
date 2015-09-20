@@ -1,0 +1,29 @@
+.index-welcome-loading{
+    text-align:center;
+    padding:30px 0;
+}
+
+.user-entry{
+    &-list-block-a{
+        margin-top:0px;
+    }
+    &-list-block-b{
+       margin-bottom: 20px;
+    }
+    &-list-block-a,
+    &-list-block-b {
+       input[type=text],
+       input[type=password],
+       input[type=email] {
+           color: #8e8e93;
+           text-align: right;
+       }
+    }
+    &-lists{
+        .avatar-item{
+            .item-inner{
+                min-height: 100px;
+            }
+        }
+    }
+}
