@@ -10,6 +10,8 @@ var gulp = require('gulp')
     , revReplace = require("gulp-rev-replace")
     , fs = require('fs')
     , rename = require('gulp-rename')
+    , uglify = require('gulp-uglify')
+    
 // clean assets
 gulp.task('base-clean', function(){
     gulp.src([ 'assets/*.*', 'dist/*' ])
@@ -46,6 +48,7 @@ gulp.task('base-build', ['base-assets'], function(callback){
         './assets/js/webuploader.html5only.min.js'
     ], { base : 'js/' }) 
     .pipe(concat('base.js'))
+    .pipe(uglify())
     .pipe(gulp.dest('./dist/'))
     .on('end', function(){
         // css
