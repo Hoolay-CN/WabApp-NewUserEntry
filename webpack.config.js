@@ -4,5 +4,6 @@ module.exports = {
     output : {
         path : __dirname + '/assets/',
         filename : 'bundle.js'
-    }
+    },
+    plugins : []
 }

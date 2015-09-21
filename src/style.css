@@ -1,18 +1,18 @@
-/* line 1, style.scss */
+/* line 3, style.scss */
 .index-welcome-loading {
   text-align: center;
   padding: 30px 0;
 }
 
-/* line 7, style.scss */
+/* line 9, style.scss */
 .user-entry-list-block-a {
   margin-top: 0px;
 }
-/* line 10, style.scss */
+/* line 12, style.scss */
 .user-entry-list-block-b {
   margin-bottom: 20px;
 }
-/* line 15, style.scss */
+/* line 17, style.scss */
 .user-entry-list-block-a input[type=text],
 .user-entry-list-block-a input[type=password],
 .user-entry-list-block-a input[type=email], .user-entry-list-block-b input[type=text],
@@ -21,7 +21,48 @@
   color: #8e8e93;
   text-align: right;
 }
-/* line 24, style.scss */
+/* line 26, style.scss */
 .user-entry-lists .avatar-item .item-inner {
   min-height: 100px;
+}
+/* line 29, style.scss */
+.user-entry-lists .avatar-item .item-after {
+  max-height: 80px;
+}
+/* line 31, style.scss */
+.user-entry-lists .avatar-item .item-after .thumb-link {
+  display: inline-block;
+  overflow: hidden;
+  background: url("./public/iconfont-plus .png") no-repeat center center #f2f2f2;
+  background-size: 40% 40%;
+  height: 80px;
+  width: 80px;
+  -moz-border-radius: 40px;
+  -webkit-border-radius: 40px;
+  border-radius: 40px;
+}
+/* line 39, style.scss */
+.user-entry-lists .avatar-item .item-after .thumb-link img {
+  width: 80px;
+  height: 80px;
+}
+
+/* webuploader */
+/* line 50, style.scss */
+.webuploader-container {
+  position: relative;
+}
+
+/* line 53, style.scss */
+.webuploader-element-invisible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* line 61, style.scss */
+.webuploader-pick-disable {
+  opacity: 0.6;
+  pointer-events: none;
 }

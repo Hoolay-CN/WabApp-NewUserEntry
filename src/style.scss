@@ -1,3 +1,5 @@
+@import "compass/css3/border-radius";
+
 .index-welcome-loading{
     text-align:center;
     padding:30px 0;
@@ -24,6 +26,39 @@
             .item-inner{
                 min-height: 100px;
             }
+            .item-after{
+                max-height: 80px;
+                .thumb-link{
+                    display:inline-block;
+                    overflow:hidden;
+                    background:url("./public/iconfont-plus .png") no-repeat center center #f2f2f2;
+                    background-size: 40% 40%;
+                    height : 80px;
+                    width : 80px;
+                    @include border-radius(40px);
+                    img{
+                        width: 80px;
+                        height: 80px;
+                    }
+                }
+            }
         }
     }
+}
+
+/* webuploader */
+.webuploader-container {
+	position: relative;
+}
+.webuploader-element-invisible {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+.webuploader-pick {}
+.webuploader-pick-hover {}
+
+.webuploader-pick-disable {
+	opacity: 0.6;
+	pointer-events:none;
 }
