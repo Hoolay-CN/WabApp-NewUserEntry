@@ -1,4 +1,4 @@
-// start
+//// start
 var gulp = require('gulp')
     , clean = require('gulp-clean')
     , webpackConfig = require('./webpack.config.js')
@@ -14,7 +14,7 @@ var gulp = require('gulp')
     
 // clean assets
 gulp.task('base-clean', function(){
-    gulp.src([ 'assets/*.*', 'dist/*' ])
+    gulp.src([ 'assets/*', 'dist/*' ])
         .pipe(clean())
 })
 
@@ -22,20 +22,26 @@ gulp.task('base-clean', function(){
 gulp.task('base-assets', [ 'base-clean' ], function(callback){
     // framework7
     gulp.src([
-        'node_modules/framework7/dist/**/*.js',
-        'node_modules/framework7/dist/**/*.css',
+        //'node_modules/framework7/dist/**/*.js',
+        //'node_modules/framework7/dist/**/*.css',
+        'node_modules/framework7-plus/**/*.js',
+        'node_modules/framework7-plus/**/*.css',
+        'node_modules/framework7-plus/**/*.png'
     ])
         .pipe(gulp.dest('./assets'))
+        .on('end', function(){
+            gulp.src([
+                'node_modules/jquery/dist/*.js',
+                'node_modules/avalonjs/dist/avalon.*.shim.js',
+                'node_modules/tb-webuploader/dist/webuploader.html5only.min.js'
+            ])
+            .pipe(gulp.dest('./assets/js/'))
+            .on('end', function(){
+                // callback 
+                callback()
+            }) 
+        })
 
-    gulp.src([
-        'node_modules/jquery/dist/*.js',
-        'node_modules/avalonjs/dist/avalon.*.shim.js',
-        'node_modules/tb-webuploader/dist/webuploader.html5only.min.js'
-    ])
-        .pipe(gulp.dest('./assets/js/'))
-
-    // callback 
-    callback()
 })
 
 // base build
@@ -53,16 +59,16 @@ gulp.task('base-build', ['base-assets'], function(callback){
     .on('end', function(){
         // css
         gulp.src([
-             './assets/css/framework7.ios.css',
+             './assets/css/framework7.css',
              './src/style.css'
         ])
-        .pipe(minifyCSS())
-        .pipe(concat('bundle.css'))
-        .pipe(gulp.dest('./dist/'))
-        .on('end', function(){
-            // callback
-            callback()
-        })
+            .pipe(minifyCSS())
+            .pipe(concat('bundle.css'))
+            .pipe(gulp.dest('./dist/'))
+            .on('end', function(){
+                // callback
+                callback()
+            })
     })    
 })
 
