@@ -22,11 +22,11 @@ gulp.task('base-clean', function(){
 gulp.task('base-assets', [ 'base-clean' ], function(callback){
     // framework7
     gulp.src([
-        //'node_modules/framework7/dist/**/*.js',
-        //'node_modules/framework7/dist/**/*.css',
-        'node_modules/framework7-plus/**/*.js',
-        'node_modules/framework7-plus/**/*.css',
-        'node_modules/framework7-plus/**/*.png'
+        'node_modules/framework7/dist/**/*.js',
+        'node_modules/framework7/dist/**/*.css',
+        //'node_modules/framework7-plus/**/*.js',
+        //'node_modules/framework7-plus/**/*.css',
+        //'node_modules/framework7-plus/**/*.png'
     ])
         .pipe(gulp.dest('./assets'))
         .on('end', function(){
@@ -59,7 +59,7 @@ gulp.task('base-build', ['base-assets'], function(callback){
     .on('end', function(){
         // css
         gulp.src([
-             './assets/css/framework7.css',
+             './assets/css/framework7.ios.css',
              './src/style.css'
         ])
             .pipe(minifyCSS())
