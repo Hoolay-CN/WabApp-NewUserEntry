@@ -14,8 +14,8 @@ var gulp = require('gulp')
     
 // clean assets
 gulp.task('base-clean', function(){
-    gulp.src([ 'assets/*', 'dist/*' ])
-        .pipe(clean())
+    return gulp.src([ 'assets/*', 'dist/*' ])
+               .pipe(clean())
 })
 
 // base lib

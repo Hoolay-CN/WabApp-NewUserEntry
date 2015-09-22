@@ -14,7 +14,9 @@ if( matcher = location.host.match(matcher) ){
 var defualts = { 
      // entry : [ url , method, isRemote ] 
      getAllColleges : [ '/api/user/default_colleges', 'get' ],
-     getBuckets : [ '/api/pictures/buckets', 'get' ]
+     getBuckets : [ '/api/pictures/buckets', 'get' ],
+     codeConfirmation : [ '/api/user/code_confirmation', 'get' ],
+     codeCompletion : [ '/api/user/code_completion', 'post' ]
 }
 
 //bind url variables

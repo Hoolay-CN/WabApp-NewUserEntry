@@ -22,14 +22,15 @@ var _upPrefixes = {
 var vmodel = avalon.define({
         $id : 'vmUserentry',
         data : {
-            name : 'Charlie',
+            name : '',
             gender : '',
             avatar : '',  
-            location : '信阳',
-            college_id: 3,
+            location : '',
+            college_id: 0,
             phone : '',
             email : '',
-            password : ''
+            password : '',
+            code : ''
         },
         submitHandler : function(e){
             // validate data
@@ -42,17 +43,32 @@ var vmodel = avalon.define({
                 coreData.App.alert('Oops，请检查信息是否完善') 
                 return
             }
-            // entry done page
-            coreData.mainView.router.load({
-                url : 'pages/userentrydone.html',
-                query : avalon.mix({}, vmodel.data.$model)
-            })
+            // save state
+            coreData.App.showPreloader('处理中...')
+            api.codeCompletion( vmodel.data.$model, function(res){
+                if(res) {
+                    // entry done page
+                    coreData.mainView.router.load({
+                        url : 'pages/userentrydone.html',
+                        query : avalon.mix({}, vmodel.data.$model)
+                    })
+                }
+            }, function(){
+                coreData.App.alert('保存失败，请稍后再试试吧')
+            } ).always(function(){
+                coreData.App.hidePreloader()
+            }) 
         },
         collegesSelectHandler : function(e) {
             vmodel.data.college_id = $$(this).val()
         },
         locationSelectHandler : function() {
             vmodel.data.location = $$(this).val()
+        },
+        smartGender : function(){
+            return vmodel.data.gender == 'f' ? '女' : (
+                   vmodel.data.gender == 'm' ? '男' : '未设置'
+            )
         },
         smartAvatar : function(){
             if( !!vmodel.data.avatar ) {
@@ -61,6 +77,32 @@ var vmodel = avalon.define({
                 return 'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA='
             }
         }
+})
+
+// watcher
+vmodel.data.$watch('code', function(a, b){
+    // validate code
+    coreData.App.showPreloader('验证中...')
+    api.codeConfirmation({
+            code : a
+    }, function(res){
+        if( res && (res = res.user)) {
+            traverse(vmodel.data.$model).forEach(function(){
+                if ( this.isRoot ) 
+                    return;
+                if (res.hasOwnProperty( this.key )) {
+                        vmodel.data[this.key] = res[this.key]
+                }
+            }) 
+            //avalon.mix( vmodel.data, res )
+        }
+    }, function(err){
+        if( err && typeof err.message == 'string' ) {
+            coreData.App.alert( err.message )
+        }
+    }).always(function(){
+        coreData.App.hidePreloader()
+    })
 })
 
 // export 
@@ -136,6 +178,13 @@ module.exports.pageAfterInit = function(page) {
        
        // scan
        avalon.scan(page.container) 
+
+       // auth code
+       if(!page.query.code) {
+           coreData.App.alert('非法验证')
+       } else {
+           vmodel.data.code = page.query.code
+       }
     })    
 }
 

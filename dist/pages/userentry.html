@@ -28,13 +28,14 @@
       <a class="item-link smart-select" href="#" data-open-in="popup" data-back-on-select="true">
           <!-- select -->
           <select name="gender" ms-duplex="data.gender">
-              <option value="">保密</option>
+              <option value="null">保密</option>
               <option value="m">男</option>
               <option value="f">女</option>
           </select>
           <div class="item-content">
               <div class="item-inner">
                 <div class="item-title">性别</div>
+                <div class="item-after smart-select-value">{{smartGender()}}</div>
               </div>
           </div>
       </a>

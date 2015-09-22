@@ -12,3 +12,7 @@ build source
 ```
 gulp build
 ```
+
+-----
+
+`Fuck QQx5 browser` 
