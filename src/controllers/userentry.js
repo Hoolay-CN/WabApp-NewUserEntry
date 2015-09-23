@@ -9,6 +9,8 @@ var coreData = require('../libs/coredata')
     , cities = require('../libs/city')
     , webUploader = require('../libs/webuploader')
     , traverse = require('traverse')
+    , $ = require('../libs/jquery')
+
 // colleges store
 var _colleges = null
 
@@ -34,7 +36,7 @@ var vmodel = avalon.define({
         },
         submitHandler : function(e){
             // validate data
-            if( true == traverse(vmodel.data.$model).reduce(function( acc, n){
+            if( true === traverse(vmodel.data.$model).reduce(function( acc, n){
                 this.isLeaf && acc.push(n)
                 return acc
             }, []).some(function(n){
@@ -48,10 +50,17 @@ var vmodel = avalon.define({
             api.codeCompletion( vmodel.data.$model, function(res){
                 if(res) {
                     // entry done page
-                    coreData.mainView.router.load({
-                        url : 'pages/userentrydone.html',
-                        query : avalon.mix({}, vmodel.data.$model)
-                    })
+                    //coreData.mainView.router.load({
+                    //    url : 'pages/userentrydone.html',
+                    //   query : avalon.mix({}, vmodel.data.$model)
+                    //})
+                    if( $(document.documentElement).hasClass('ios') ) {
+                        // navigate to itunes
+                        window.location.href = 'https://itunes.apple.com/cn/app/hu-lai-wang-yi-shu-jia-ban/id966069685'
+                    } else {
+                        // notice user login 
+                        coreData.App.alert('账号设置完成，马上登录胡来网（www.hoolay.cn）管理您的作品。')
+                    }
                 }
             }, function(){
                 coreData.App.alert('保存失败，请稍后再试试吧')
@@ -163,7 +172,7 @@ module.exports.pageAfterInit = function(page) {
        // events
        uploader.on('uploadSuccess', function(file, response) {
            if( response.code == '200') {
-               vmodel.data.avatar = _upPrefixes[res[0].bucket] + response.url
+               vmodel.data.avatar = res[0].prefix + response.url
            }
        })
        .on('startUpload', function(){
