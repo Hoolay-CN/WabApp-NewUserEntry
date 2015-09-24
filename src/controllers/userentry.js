@@ -35,8 +35,10 @@ var vmodel = avalon.define({
             code : ''
         },
         submitHandler : function(e){
+            var data = avalon.mix({}, vmodel.data.$model)
+            delete data['avatar']
             // validate data
-            if( true === traverse(vmodel.data.$model).reduce(function( acc, n){
+            if( true === traverse(data).reduce(function( acc, n){
                 this.isLeaf && acc.push(n)
                 return acc
             }, []).some(function(n){
@@ -62,7 +64,21 @@ var vmodel = avalon.define({
                         coreData.App.alert('账号设置完成，马上登录胡来网（www.hoolay.cn）管理您的作品。')
                     }
                 }
-            }, function(){
+            }, function(err){
+                if( err.message ) {
+                    if( typeof err.message == 'string' ) {
+                        coreData.App.alert( err.message )
+                    } else if( $.isPlainObject( err.message ) ) {
+                        traverse(err.message).forEach(function(n){
+                            if( this.isRoot )
+                                return
+                            coreData.App.alert(n)
+                        })
+                    }
+
+                    return
+                }
+
                 coreData.App.alert('保存失败，请稍后再试试吧')
             } ).always(function(){
                 coreData.App.hidePreloader()
@@ -184,7 +200,20 @@ module.exports.pageAfterInit = function(page) {
        .on('uploadError', function(file, reason){
            alert(reason)
        })
-       
+      
+        // detect select avatar 
+        var _avatarTouchCount = 1 
+        $('#avatar_picker').on('click', function(e){
+            if( e.target && e.target.nodeName.toLowerCase() === 'label' ) {
+                ++_avatarTouchCount 
+            }
+
+            // notice user may be can not select avatar
+            if( _avatarTouchCount >= 4 ) {
+                coreData.App.alert('是不是上传头像遇到问题，您可以尝试在浏览器中打开或者暂时不设置头像，完成基本设置后，可以下载【胡来伙伴APP】，获得更好的体验:)')
+            }
+        })
+
        // scan
        avalon.scan(page.container) 
 
